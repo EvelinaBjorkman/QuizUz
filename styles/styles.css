@@ -1,0 +1,54 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+.QandAsection {
+  border-top: solid black 2px;
+  padding-top: 40px;
+}
+
+.start-page__hero {
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-rows: 2fr 1fr;
+      grid-template-rows: 2fr 1fr;
+  width: 100vw;
+  height: 100vh;
+  background: blueviolet;
+}
+
+.start-page__hero__text {
+  text-align: center;
+  -ms-flex-item-align: center;
+      -ms-grid-row-align: center;
+      align-self: center;
+}
+
+.start-page__hero__text__title {
+  font-size: 120px;
+  font-weight: 900;
+  margin-bottom: 20px;
+  color: wheat;
+}
+
+.start-page__hero__text__description {
+  font-size: 25px;
+}
+
+.start-page__hero__button-container {
+  -ms-flex-item-align: center;
+      -ms-grid-row-align: center;
+      align-self: center;
+  -ms-grid-column-align: center;
+      justify-self: center;
+}
+
+.start-page__hero__button-container__takeQuizBtn {
+  border-radius: 50px;
+  height: 100px;
+  width: 100px;
+  background: yellowgreen;
+  border: 2px solid black;
+}
+/*# sourceMappingURL=styles.css.map */
