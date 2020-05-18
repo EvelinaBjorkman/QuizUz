@@ -20,7 +20,7 @@ require_once "../db.php";
       <input name="Question-1" type="text">
       <div id="AnswerSection">
         <label for="">Answers</label>
-        <input name="corrAnswer-1" class="corrAnswer" type="radio"><input name="Answer-1-Que-1" type="text"></input>
+        <input name="corrAnswer-1-Que-1" class="corrAnswer" type="radio"><input name="Answer-1-Que-1" type="text"></input>
       </div>
       <button id="AddAnswerBtn-1" type="button">Add answer</button>
     </section>
@@ -56,17 +56,14 @@ if (isset($_POST['QuizName'])) {
 
                     $answerPk = insertAnswerSQL($db, $answer, $questionId);
 
-                    if (isset($_POST['corrAnswer-' . $i])) {
+                    if (isset($_POST['corrAnswer-' . $i . '-Que-' . $y])) {
                         $corrAnswer = $answerPk;
 
                         echo 'CorrAnswer: ' . $corrAnswer . ' / ';
 
-                        updateCorrAnswerSQL($db, $corrAnswer, $quizId);
+                        updateCorrAnswerSQL($db, $corrAnswer, $quizId, $questionId);
 
                     }
-                    // else {
-                    //     break;
-                    // }
 
                 } else {
                     break;
@@ -76,23 +73,6 @@ if (isset($_POST['QuizName'])) {
         }
     }
 }
-
-//   if (isset($_POST['Question'])) {
-//       $question = $_POST['Question'];
-
-//       echo $question;
-//       echo '<br>';
-
-//       $sql = "INSERT INTO question (question, quizId)
-// VALUES (:question, :quizId)";
-//       $stmt = $db->prepare($sql);
-//       $stmt->bindParam(':question', $question);
-//       $stmt->bindParam(':quizId', $quizId);
-//       $stmt->execute();
-
-//       $questionId = $db->lastInsertId();
-//       echo $questionId;
-//   }
 
 function insertQuizSQL($db, $quizName)
 {
@@ -129,15 +109,17 @@ function insertAnswerSQL($db, $answer, $questionId)
     return $db->lastInsertId();
 }
 
-function updateCorrAnswerSQL($db, $corrAnswer, $quizId)
+function updateCorrAnswerSQL($db, $corrAnswer, $quizId, $questionId)
 {
     $sql = "UPDATE question
   SET correctAnswer = :correctAnswer
-  WHERE quizId = :quizId";
+  WHERE quizId = :quizId
+  AND pk = :questionId";
 
     $stmt = $db->prepare($sql);
     $stmt->bindParam(':correctAnswer', $corrAnswer);
     $stmt->bindParam(':quizId', $quizId);
+    $stmt->bindParam(':questionId', $questionId);
     $stmt->execute();
 }
 ?>
@@ -161,10 +143,6 @@ addQuestionBtn.addEventListener('click', function() {
   addQuestionBtnFunction();
 });
 
-
-
-
-
 function addAnswerBtnFunction(QandAsection, addAnswerBtn) {
   answerCounter++;
 
@@ -174,34 +152,23 @@ function addAnswerBtnFunction(QandAsection, addAnswerBtn) {
   const newAnswer = document.createElement('div');
   const radioAnswer = document.createElement('input');
   const inputAnswer = document.createElement('input');
-  // const addAnswerBtn = document.querySelector('#AddAnswerBtn-' + questionCounter);
 
   radioAnswer.setAttribute('type', 'radio');
-  radioAnswer.setAttribute('name', 'corrAnswer-' + answerCounter);
+  radioAnswer.setAttribute('name', 'corrAnswer-' + answerCounter + '-Que-' + questionCounter);
   radioAnswer.setAttribute('class', 'corrAnswer');
 
   inputAnswer.setAttribute('type', 'text');
   inputAnswer.setAttribute('name', 'Answer-' + answerCounter + '-Que-' + questionCounter);
 
-  // QandAsection.appendChild(newAnswer);
   QandAsection.insertBefore(newAnswer, addAnswerBtn);
   newAnswer.appendChild(radioAnswer);
   newAnswer.appendChild(inputAnswer);
-
-
-
-  // <input name="corrAnswer-1" class="corrAnswer" type="radio"><input name="Answer-1" type="text"></input>
 }
 
 function addQuestionBtnFunction() {
 
   questionCounter++;
   answerCounter = 1;
-
-  // addAnswerBtn = document.querySelector('#AddAnswerBtn-' + questionCounter);
-  // console.log(questionCounter);
-  // console.log(addAnswerBtn);
-  // const qAndAsection = document.querySelector('#QandAsection-' + questionCounter);
 
   const form = document.querySelector('#form');
   const newQuestionSection = document.createElement('div');
@@ -227,14 +194,12 @@ function addQuestionBtnFunction() {
   const inputAnswerInQue = document.createElement('input');
 
   radioAnswerInQue.setAttribute('type', 'radio');
-  radioAnswerInQue.setAttribute('name', 'corrAnswer-' + answerCounter);
+  radioAnswerInQue.setAttribute('name', 'corrAnswer-' + answerCounter + '-Que-' + questionCounter);
   radioAnswerInQue.setAttribute('class', 'corrAnswer');
 
   inputAnswerInQue.setAttribute('type', 'text');
   inputAnswerInQue.setAttribute('name', 'Answer-' + answerCounter + '-Que-' + questionCounter);
 
-  // form.insertBefore(radioAnswerInQue, newAddAnswerBtn);
-  // form.insertBefore(inputAnswerInQue, newAddAnswerBtn);
   newQuestionSection.insertBefore(newAnswerInQue, newAddAnswerBtn);
   newAnswerInQue.appendChild(radioAnswerInQue);
   newAnswerInQue.appendChild(inputAnswerInQue);
@@ -243,9 +208,6 @@ function addQuestionBtnFunction() {
 
     addAnswerBtnFunction(newQuestionSection, newAddAnswerBtn);
   });
-
-  // <button id="AddAnswerBtn" type="button">Add answer</button>
-
 }
 
 
