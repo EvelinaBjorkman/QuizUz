@@ -11,13 +11,17 @@ require_once './header.php';
         <input name="Question-1" type="text" class="uk-card-title" placeholder="Question">
       </div>
       <div id="AnswerSection" class="uk-card-body">
-        <label for="">Answers:</label>
-        <input id="corrAnswer-1-Que-1" class="corrAnswer uk-radio" type="radio" name="makingRadio1"><input name="Answer-1-Que-1" type="text"></input>
+        <p>Click the radio button to select the rigth answer. <br>Answers:</p>
+        <!-- <label for=""></label> -->
+        <div class="answer_input">
+          <input id="corrAnswer-1-Que-1" class="corrAnswer uk-radio uk-margin-small-left uk-margin-small-right" type="radio" name="makingRadio1">
+          <input name="Answer-1-Que-1" type="text" >
+        </div>
       </div>
-      <button id="AddAnswerBtn-1" type="button">Add answer</button>
+      <button id="AddAnswerBtn-1" type="button" class="uk-button uk-button-default uk-button-small uk-margin-small-left uk-margin-small-bottom" >Add answer</button>
     </section>
-    <button id="AddQuestionBtn" type="button">Add question</button>
-    <button type="submit">Save Quiz</button>
+    <button id="AddQuestionBtn" type="button" class="uk-button uk-button-white ">Add question</button>
+    <button type="submit" class="uk-button uk-button-secondary ">Save Quiz</button>
   </form>
 </div>
 
@@ -151,20 +155,24 @@ function addAnswerBtnFunction(QandAsection, addAnswerBtn, answerDiv) {
   answerCounter++;
 
   const form = document.querySelector('#form');
+  const answerInputDiv = document.createElement('div');
   const radioAnswer = document.createElement('input');
   const inputAnswer = document.createElement('input');
 
+  answerInputDiv.setAttribute('class', 'answer_input');
+
   radioAnswer.setAttribute('type', 'radio');
-  radioAnswer.setAttribute('class', 'corrAnswer uk-radio');
+  radioAnswer.setAttribute('class', 'corrAnswer uk-radio uk-margin-small-left uk-margin-small-right');
   radioAnswer.setAttribute('name', 'makingRadio' + questionCounter);
   radioAnswer.setAttribute('value', answerCounter);
 
   inputAnswer.setAttribute('type', 'text');
   inputAnswer.setAttribute('name', 'Answer-' + answerCounter + '-Que-' + questionCounter);
 
+  answerInputDiv.appendChild(radioAnswer);
+  answerInputDiv.appendChild(inputAnswer);
+  answerDiv.appendChild(answerInputDiv);
   QandAsection.insertBefore(answerDiv, addAnswerBtn);
-  answerDiv.appendChild(radioAnswer);
-  answerDiv.appendChild(inputAnswer);
 
 }
 
@@ -190,6 +198,7 @@ function addQuestionBtnFunction() {
 
   newAddAnswerBtn.setAttribute('id', 'AddAnswerBtn-' + questionCounter);
   newAddAnswerBtn.setAttribute('type', 'button');
+  newAddAnswerBtn.setAttribute('class', 'uk-button uk-button-default uk-button-small uk-margin-small-left uk-margin-small-bottom');
   newAddAnswerBtn.innerHTML = 'Add answer';
 
 
@@ -199,26 +208,36 @@ function addQuestionBtnFunction() {
   newQuestionSection.appendChild(newAddAnswerBtn);
 
   const newAnswerInQue = document.createElement('div');
-  const answerLable = document.createElement('lable');
+  const newAnswerInputInQue = document.createElement('div');
+  // const answerLable = document.createElement('lable');
   const radioAnswerInQue = document.createElement('input');
   const inputAnswerInQue = document.createElement('input');
 
-  answerLable.innerHTML = 'Answers:';
+  // answerLable.innerHTML = 'Answers:';
 
   newAnswerInQue.setAttribute('class', 'uk-card-body');
 
+  newAnswerInputInQue.setAttribute('class', 'answer_input');
+
   radioAnswerInQue.setAttribute('type', 'radio');
   radioAnswerInQue.setAttribute('value', answerCounter);
-  radioAnswerInQue.setAttribute('class', 'corrAnswer uk-radio');
+  radioAnswerInQue.setAttribute('class', 'corrAnswer uk-radio uk-margin-small-left uk-margin-small-right');
   radioAnswerInQue.setAttribute('name', 'makingRadio' + questionCounter);
 
   inputAnswerInQue.setAttribute('type', 'text');
   inputAnswerInQue.setAttribute('name', 'Answer-' + answerCounter + '-Que-' + questionCounter);
 
+  // newQuestionSection.insertBefore(answerLable, newAddAnswerBtn);
   newQuestionSection.insertBefore(newAnswerInQue, newAddAnswerBtn);
-  newAnswerInQue.appendChild(answerLable);
-  newAnswerInQue.appendChild(radioAnswerInQue);
-  newAnswerInQue.appendChild(inputAnswerInQue);
+  newAnswerInQue.appendChild(newAnswerInputInQue);
+  // newAnswerInputInQue.appendChild(answerLable);
+  newAnswerInputInQue.appendChild(radioAnswerInQue);
+  newAnswerInputInQue.appendChild(inputAnswerInQue);
+
+  // answerInputDiv.appendChild(radioAnswer);
+  // answerInputDiv.appendChild(inputAnswer);
+  // answerDiv.appendChild(answerInputDiv);
+  // QandAsection.insertBefore(answerDiv, addAnswerBtn);
 
   newAddAnswerBtn.addEventListener('click', function() {
     addAnswerBtnFunction(newQuestionSection, newAddAnswerBtn, newAnswerInQue);

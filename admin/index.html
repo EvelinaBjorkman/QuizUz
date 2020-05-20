@@ -3,20 +3,42 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="./styles/styles.css" />
+    <link rel="stylesheet" href="../styles/styles.css" />
     <!-- UIkit CSS -->
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/uikit@3.4.6/dist/css/uikit.min.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/uikit@3.4.6/dist/css/uikit.min.css"
+    />
 
-<!-- UIkit JS -->
-<script src="https://cdn.jsdelivr.net/npm/uikit@3.4.6/dist/js/uikit.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/uikit@3.4.6/dist/js/uikit-icons.min.js"></script>
+    <!-- UIkit JS -->
+    <script src="https://cdn.jsdelivr.net/npm/uikit@3.4.6/dist/js/uikit.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/uikit@3.4.6/dist/js/uikit-icons.min.js"></script>
     <title>QuizUz Admin</title>
   </head>
-  <body>
-    <h1>hej</h1>
+  <body class="admin_index_body">
+    <nav class="uk-navbar-container uk-margin" uk-navbar>
+      <div class="uk-navbar-center">
+        <a class="uk-navbar-item uk-logo" href="./index.php">QuizUz</a>
+      </div>
+    </nav>
+    <div class="uk-container">
+      <div class="transperant_background">
+        <section class="text-container">
+          <h1 class="uk-heading-xlarge">Admin</h1>
+          <a href="./create_quiz.php"
+            ><button id="createQuizBtn" class="uk-button uk-button-secondary">
+              CREATE NEW QUIZ
+            </button></a
+          >
+          <p class="uk-taxt-large">
+            <b class="uk-text-bolder">Here´s a list of created quizes</b>, click
+            on one to se the questions & answers and to be able to edit the
+            quiz.
+          </p>
+        </section>
+      </div>
+    </div>
 
-    <button id="createQuizBtn">create quiz</button>
-
-    <script src="./create_quiz.js"></script>
+    <!-- <script src="./create_quiz.js"></script> -->
   </body>
 </html>

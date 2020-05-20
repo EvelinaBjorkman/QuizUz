@@ -3,7 +3,37 @@
   padding: 0;
 }
 
-.QandAsection {
-  border-top: solid black 2px;
-  padding-top: 40px;
+// .QandAsection {
+//   border-top: solid black 2px;
+//   padding-top: 40px;
+// }
+
+// .admin_index_body {
+//   background-image: url("https://source.unsplash.com/featured/?colorful");
+//   width: 100vw;
+//   max-width: 100vw;
+//   height: 100vh;
+//   max-height: 100vh;
+// }
+
+.admin_body {
+  background-image: url("https://source.unsplash.com/featured/?colorful");
+  min-width: 100vw;
+  max-width: 100vw;
+  min-height: 100vh;
+}
+
+.uk-container {
+  background: rgba(255, 255, 255, 0.6);
+  padding: 20px;
+  margin: 20px;
+  margin-bottom: 50px;
+}
+
+.uk-button-white {
+  background: white;
+}
+
+.answer_input {
+  display: block;
 }
