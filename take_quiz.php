@@ -22,12 +22,12 @@ if (isset($_GET['quizId'])) {
 
 <div class="uk-container">
 
-  <h1 id="quizName"></h1>
+  <h1 class="uk-heading-large" id="quizName"></h1>
   <form action="./result.php" method="POST">
     <section class="quizSection">
 
     </section>
-    <button type="submit">Submit</button>
+    <button class="uk-button uk-button-secondary" type="submit">Submit</button>
   </form>
 
 </div>
@@ -63,7 +63,7 @@ for (let i = 0; i < quizArray.length; i++) {
 document.querySelector('#quizName').innerHTML = quiz.name;
   const quizSection = document.querySelector('.quizSection');
 
-for(let i = 0; i < quiz.questions.length; i++) {
+  for(let i = 0; i < quiz.questions.length; i++) {
 
   const question = quiz.questions[i];
 

@@ -13,8 +13,10 @@
   <title>Document</title>
 </head>
 <body class="admin_body">
-  <nav class="uk-navbar-container uk-margin" uk-navbar>
+<div uk-sticky="top: 0">
+  <nav class="uk-navbar-container uk-margin " uk-navbar>
     <div class="uk-navbar-center">
       <a class="uk-navbar-item uk-logo" href="./index.php">QuizUz</a>
     </div>
   </nav>
+  </div>

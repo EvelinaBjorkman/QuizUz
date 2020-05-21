@@ -5,16 +5,17 @@
 
 .admin_body {
   background-image: url("https://source.unsplash.com/featured/?colorful");
+  background-size: cover;
   min-width: 100vw;
   max-width: 100vw;
-  min-height: 100vh;
+  min-height: calc(100vh + 200px);
+  padding-bottom: 200px;
 }
 
 .uk-container {
-  background: rgba(255, 255, 255, 0.6);
+  background: rgba(255, 255, 255, 0.7);
   padding: 20px;
   margin: 20px;
-  margin-bottom: 50px;
 }
 
 .uk-button-white {
@@ -23,6 +24,15 @@
 
 .answer_input {
   display: block;
+}
+
+ul {
+  -moz-column-count: 4;
+  -moz-column-gap: 20px;
+  -webkit-column-count: 4;
+  -webkit-column-gap: 20px;
+  column-count: 4;
+  column-gap: 20px;
 }
 
 .start-page__hero {
@@ -71,9 +81,9 @@
 
 .admin_index_body {
   background-image: url("https://source.unsplash.com/featured/?colorful");
+  background-size: contain;
   width: 100vw;
   max-width: 100vw;
-  height: 100vh;
-  min-height: 100vh;
+  min-height: calc(100vh + 500px);
 }
 /*# sourceMappingURL=styles.css.map */

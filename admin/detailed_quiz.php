@@ -21,7 +21,7 @@ if (isset($_GET['quizId'])) {
 <div class="uk-container">
 
   <section class="quizSection">
-    <h1 id="quizName"></h1>
+    <h1 class="uk-heading-large" id="quizName"></h1>
 
 
   </section>
@@ -97,7 +97,7 @@ for(let i = 0; i < quiz.questions.length; i++) {
 
 
     if (question.correctAnswer === answer.pk) {
-      answerP.setAttribute('class', 'uk-text-success');
+      answerP.setAttribute('class', 'uk-text-success uk-text-bold');
     }
     answerSection.appendChild(answerP);
     questionSection.appendChild(answerSection);
