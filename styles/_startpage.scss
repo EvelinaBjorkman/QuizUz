@@ -1,38 +1,38 @@
-.start-page__hero {
-  display: grid;
-  grid-template-rows: 2fr 1fr;
-  width: 100vw;
-  height: 100vh;
-  // align-items: s;
-  // justify-content: center;
-  background: blueviolet;
+// .start-page__hero {
+//   display: grid;
+//   grid-template-rows: 2fr 1fr;
+//   width: 100vw;
+//   height: 100vh;
+//   // align-items: s;
+//   // justify-content: center;
+//   background: blueviolet;
 
-  &__text {
-    text-align: center;
-    align-self: center;
+//   &__text {
+//     text-align: center;
+//     align-self: center;
 
-    &__title {
-      font-size: 120px;
-      font-weight: 900;
-      margin-bottom: 20px;
-      color: wheat;
-    }
+//     &__title {
+//       font-size: 120px;
+//       font-weight: 900;
+//       margin-bottom: 20px;
+//       color: wheat;
+//     }
 
-    &__description {
-      font-size: 25px;
-    }
-  }
+//     &__description {
+//       font-size: 25px;
+//     }
+//   }
 
-  &__button-container {
-    align-self: center;
-    justify-self: center;
+//   &__button-container {
+//     align-self: center;
+//     justify-self: center;
 
-    &__takeQuizBtn {
-      border-radius: 50px;
-      height: 100px;
-      width: 100px;
-      background: yellowgreen;
-      border: 2px solid black;
-    }
-  }
-}
+//     &__takeQuizBtn {
+//       border-radius: 50px;
+//       height: 100px;
+//       width: 100px;
+//       background: yellowgreen;
+//       border: 2px solid black;
+//     }
+//   }
+// }

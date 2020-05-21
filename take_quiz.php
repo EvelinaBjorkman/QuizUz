@@ -114,9 +114,6 @@ document.querySelector('#quizName').innerHTML = quiz.name;
     questionSection.appendChild(answerSection);
 
   }
-
-
-
   // const submitBtn = document.querySelector('#submitBtn');
   // submitBtn.addEventListener('click', function() {
   //   displayResults(question);

@@ -12,7 +12,7 @@
 <script src="https://cdn.jsdelivr.net/npm/uikit@3.4.6/dist/js/uikit-icons.min.js"></script>
   <title>Document</title>
 </head>
-<body class="admin_body">
+<body class="body">
 <div uk-sticky="top: 0">
   <nav class="uk-navbar-container uk-margin " uk-navbar>
     <div class="uk-navbar-center">

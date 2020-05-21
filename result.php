@@ -20,9 +20,9 @@ for ($i = 0; $i <= $maxOfQuestions; $i++) {
 ?>
 
 <div class="uk-container">
-  <h1 class="uk-heading-large uk-text-center">Ditt resultat blev: </h1>
+  <h1 class="uk-heading-large uk-text-center">Your result is: </h1>
 
   <h2 class="uk-heading-xlarge uk-text-center"><?=$result?></h2>
-  <p>Av <?=$numOfquestions?></p>
+  <p class="uk-heading-large uk-text-center">Out of <?=$numOfquestions?></p>
 
 </div>
