@@ -1,3 +1,11 @@
 @import "./main";
 @import "./startpage";
 @import "./admin_index";
+
+.fa,
+.fas,
+.fab,
+.far {
+  font-family: "FontAwesome" !important;
+  font-style: unset !important;
+}

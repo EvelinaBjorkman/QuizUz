@@ -41,4 +41,12 @@ ul {
   max-width: 100vw;
   min-height: calc(100vh + 500px);
 }
+
+.fa,
+.fas,
+.fab,
+.far {
+  font-family: "FontAwesome" !important;
+  font-style: unset !important;
+}
 /*# sourceMappingURL=styles.css.map */

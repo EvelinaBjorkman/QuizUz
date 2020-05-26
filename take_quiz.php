@@ -87,7 +87,6 @@ document.querySelector('#quizName').innerHTML = quiz.name;
   hiddenField.setAttribute('type', 'hidden');
   hiddenField.setAttribute('name', 'correctAnswer-' + i);
   hiddenField.setAttribute('value', question.correctAnswer);
-  console.log(question.answers.pk);
 
 
   questionSection.appendChild(hiddenField);
