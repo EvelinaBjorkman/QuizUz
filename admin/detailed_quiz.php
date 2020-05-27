@@ -35,8 +35,8 @@ if (isset($_GET['quizId'])) {
     </form>
 
 
-
   </section>
+  <button id="editAddQuestionBtn" type="button" class="uk-button uk-button-white ">Add question</button>
 </div>
 </body>
 </html>
@@ -87,6 +87,7 @@ editQuizNameForm.appendChild(hiddenQuizName);
 for(let i = 0; i < quiz.questions.length; i++) {
 
   const answerNumList = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19];
+  const questionNumList = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19];
 
   const question = quiz.questions[i];
 
@@ -257,7 +258,8 @@ for(let i = 0; i < quiz.questions.length; i++) {
   let questionId = question.pk;
   editAddAnswerBtn.addEventListener('click', function() {
     let answerCounter = answerNumList.shift();
-    addAnswerBtnFunction(editAnswerSection, editAddAnswerBtn, editAnswerInputDiv, answerCounter, questionId, answerNumList)
+    let trash = true;
+    addAnswerBtnFunction(editAnswerSection, editAddAnswerBtn, editAnswerInputDiv, answerCounter, trash, questionId, answerNumList)
   })
 
 
@@ -265,6 +267,14 @@ for(let i = 0; i < quiz.questions.length; i++) {
 
 
 }
+
+let editAddQuestionBtn = document.querySelector('#editAddQuestionBtn');
+editAddQuestionBtn.addEventListener('click', function() {
+
+    addQuestionBtnFunction(editAddQuestionBtn);
+})
+
+
 
 
 editQuizNameBtn = document.querySelector('#editQuizNameBtn');
@@ -305,22 +315,29 @@ function findQuestion(quiz, question) {
   return quiz.questions.find(q => q.pk === question.pk);
 }
 
-function addAnswerBtnFunction(QandAsection, addAnswerBtn, answerDiv, counter, questionId, answerNumList) {
+function addAnswerBtnFunction(QandAsection, addAnswerBtn, answerDiv, counter, trash, questionId, answerNumList) {
 
-  const form = document.querySelector('#editForm');
+  // const form = document.querySelector('#editForm');
   const answerInputDiv = document.createElement('div');
   const radioAnswer = document.createElement('input');
   const inputAnswer = document.createElement('input');
   const deleteI = document.createElement('i');
 
   deleteI.setAttribute('class', 'far fa-trash');
+  deleteI.setAttribute('id', 'delete')
 
   answerInputDiv.setAttribute('class', 'answer_input');
   answerInputDiv.setAttribute('id', 'newAnswer-' + counter);
 
   radioAnswer.setAttribute('type', 'radio');
   radioAnswer.setAttribute('class', 'corrAnswer uk-radio uk-margin-small-left uk-margin-small-right');
-  radioAnswer.setAttribute('name', 'editRadio-' + questionId);
+
+  if(trash) {
+    radioAnswer.setAttribute('name', 'editRadio-' + questionId);
+  } else {
+    radioAnswer.setAttribute('name', 'editRadio');
+  }
+
   radioAnswer.setAttribute('value', counter);
 
   inputAnswer.setAttribute('type', 'text');
@@ -328,7 +345,11 @@ function addAnswerBtnFunction(QandAsection, addAnswerBtn, answerDiv, counter, qu
 
   answerInputDiv.appendChild(radioAnswer);
   answerInputDiv.appendChild(inputAnswer);
-  answerInputDiv.appendChild(deleteI);
+
+  if(trash) {
+    answerInputDiv.appendChild(deleteI);
+  }
+
   QandAsection.appendChild(answerInputDiv);
 
   deleteI.addEventListener('click', function() {
@@ -346,4 +367,92 @@ let element = document.getElementById(elementId);
 element.parentNode.removeChild(element);
 }
 
+function removeElementByClass(elementClassName) {
+let element = document.getElementById(elementClassName);
+element.parentNode.removeChild(element);
+}
+
+function addQuestionBtnFunction(editAddQuestionBtn) {
+
+  answerCounter = 0;
+
+  // const form = document.querySelector('#editForm');
+  const quizSection = document.querySelector('.quizSection');
+  const newQuestionSection = document.createElement('div');
+  let newQuestionNameDiv = document.createElement('div');
+  const inputQuestion = document.createElement('input');
+  const newAddAnswerBtn = document.createElement('button');
+  const saveNewQuestionBtn = document.createElement('button');
+  const form = document.createElement('form');
+
+  const hiddenQuizId = document.createElement('input');
+  hiddenQuizId.setAttribute('type', 'hidden');
+  hiddenQuizId.setAttribute('value', quiz.pk);
+  hiddenQuizId.setAttribute('name', 'quizId');
+
+  form.setAttribute('action', './add_Question.php');
+  form.setAttribute('method', 'POST');
+
+  // newQuestionSection.setAttribute('id', 'QandAsection-' + questionCounter);
+  newQuestionSection.setAttribute('class', 'QandAsection uk-card uk-card-default uk-margin-bottom');
+
+  newQuestionNameDiv.setAttribute('class', 'uk-card-header uk-flex uk-flex-between');
+
+  saveNewQuestionBtn.setAttribute('type', 'submit');
+  saveNewQuestionBtn.setAttribute('class', 'uk-button uk-button-default uk-button-small uk-margin-small-left uk-margin-small-bottom');
+  saveNewQuestionBtn.innerHTML = 'Save Question';
+
+  inputQuestion.setAttribute('type', 'text');
+  inputQuestion.setAttribute('name', 'Question');
+  inputQuestion.setAttribute('class', 'uk-card-title');
+  inputQuestion.setAttribute('placeholder', 'Question');
+
+  // newAddAnswerBtn.setAttribute('id', 'AddAnswerBtn-' + questionCounter);
+  newAddAnswerBtn.setAttribute('type', 'button');
+  newAddAnswerBtn.setAttribute('class', 'uk-button uk-button-default uk-button-small uk-margin-small-left uk-margin-small-bottom');
+  newAddAnswerBtn.innerHTML = 'Add answer';
+
+  // form.insertBefore(newQuestionSection, editAddQuestionBtn);
+  form.appendChild(newQuestionSection);
+  quizSection.appendChild(newQuestionSection);
+  newQuestionNameDiv.appendChild(inputQuestion);
+  newQuestionNameDiv.appendChild(saveNewQuestionBtn);
+  newQuestionSection.appendChild(newQuestionNameDiv);
+  // newQuestionSection.appendChild(newAddAnswerBtn);
+  form.appendChild(newQuestionNameDiv);
+  form.appendChild(hiddenQuizId);
+
+  newQuestionSection.appendChild(form);
+
+  const newAnswerInQue = document.createElement('div');
+  const newAnswerInputInQue = document.createElement('div');
+  const radioAnswerInQue = document.createElement('input');
+  const inputAnswerInQue = document.createElement('input');
+
+  newAnswerInQue.setAttribute('class', 'uk-card-body');
+
+  newAnswerInputInQue.setAttribute('class', 'answer_input');
+
+  radioAnswerInQue.setAttribute('type', 'radio');
+  radioAnswerInQue.setAttribute('value', answerCounter);
+  radioAnswerInQue.setAttribute('class', 'corrAnswer uk-radio uk-margin-small-left uk-margin-small-right');
+  radioAnswerInQue.setAttribute('name', 'editRadio');
+
+  inputAnswerInQue.setAttribute('type', 'text');
+  inputAnswerInQue.setAttribute('name', 'counter-' + answerCounter);
+
+  // newQuestionSection.insertBefore(newAnswerInQue, newAddAnswerBtn);
+  form.appendChild(newAnswerInQue);
+  form.appendChild(newAddAnswerBtn);
+  // form.insertBefore(newAnswerInQue, newAddAnswerBtn);
+  newAnswerInQue.appendChild(newAnswerInputInQue);
+  newAnswerInputInQue.appendChild(radioAnswerInQue);
+  newAnswerInputInQue.appendChild(inputAnswerInQue);
+
+  newAddAnswerBtn.addEventListener('click', function() {
+    answerCounter++;
+    let trash = false;
+    addAnswerBtnFunction(newAnswerInQue, newAddAnswerBtn, newAnswerInQue, answerCounter, trash);
+  });
+}
 </script>
