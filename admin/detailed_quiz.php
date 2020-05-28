@@ -22,7 +22,11 @@ if (isset($_GET['quizId'])) {
 <div class="uk-container">
 
   <section class="quizSection">
-  <i class="far fa-trash uk-align-right" id="deleteQuiz" style="font-size: 60px; margin: 0px; color: crimson;"></i>
+    <form action="./delete_quiz.php" method="POST" class="deleteQuizForm">
+      <button type="submit">
+        <i class="far fa-trash uk-align-right" id="deleteQuiz" style="font-size: 60px; margin: 0px; color: crimson;"></i>
+      </button>
+    </form>
     <h1 class="uk-heading-large uk-space-between" id="quizName"></h1>
     <form action="./edit_quiz.php" method="POST" id="editQuizNameForm">
       <div class="uk-hidden" id="quizNameInputDiv">
@@ -33,8 +37,6 @@ if (isset($_GET['quizId'])) {
         <i class="fas fa-times" id="closeEditQuizName" style="font-size: 20px;"></i>
       </div>
     </form>
-
-
   </section>
   <button id="editAddQuestionBtn" type="button" class="uk-button uk-button-white ">Add question</button>
 </div>
@@ -65,6 +67,15 @@ for (let i = 0; i < quizArray.length; i++) {
   }
 }
 
+deleteQuizForm = document.querySelector('.deleteQuizForm');
+
+hiddenQuizIdQuizDelete = document.createElement('input');
+hiddenQuizIdQuizDelete.setAttribute('type', 'hidden');
+hiddenQuizIdQuizDelete.setAttribute('name', 'quizId');
+hiddenQuizIdQuizDelete.setAttribute('value', quiz.pk);
+
+deleteQuizForm.appendChild(hiddenQuizIdQuizDelete);
+
 quizName = document.querySelector('#quizName');
 quizName.innerHTML = quiz.name + '  <i class="fas fa-edit" id="editQuizNameBtn" style="font-size: 20px;"></i>';
 quizNameInput = document.querySelector('#quizNameInput');
@@ -92,11 +103,18 @@ for(let i = 0; i < quiz.questions.length; i++) {
   const question = quiz.questions[i];
 
   //detailed view
+  let detaildDeleteForm = document.createElement('form');
+  detaildDeleteForm.setAttribute('action', './delete_question.php');
+  detaildDeleteForm.setAttribute('method', 'POST');
+  detaildDeleteForm.setAttribute('class', 'detaildDeleteForm');
+
   let questionSection = document.createElement('section');
   questionSection.setAttribute('class', 'uk-card uk-card-default uk-margin-bottom');
 
   let questionDiv = document.createElement('div');
   questionDiv.setAttribute('class', 'uk-card-header uk-flex uk-flex-between');
+
+  let btnsDiv = document.createElement('div');
 
   let questionHeader = document.createElement('h3');
 
@@ -106,11 +124,36 @@ for(let i = 0; i < quiz.questions.length; i++) {
   editBtn.setAttribute('style', 'margin: auto 0;');
   editBtn.innerHTML = 'Edit';
 
+  let deleteQuestionBtn = document.createElement('button');
+  deleteQuestionBtn.setAttribute('type', 'submit');
+  deleteQuestionBtn.setAttribute('class', 'uk-button uk-button-small uk-button-danger');
+  deleteQuestionBtn.setAttribute('id', 'deleteQuestionBtn-' + i);
+  deleteQuestionBtn.setAttribute('style', 'margin: auto 0;');
+  deleteQuestionBtn.innerHTML = 'Delete';
+
   questionHeader.setAttribute('class', 'uk-card-title');
   questionHeader.innerHTML = question.question;
 
+  let hiddenQueIdDelete = document.createElement('input');
+  hiddenQueIdDelete.setAttribute('type', 'hidden');
+  hiddenQueIdDelete.setAttribute('value', question.pk);
+  hiddenQueIdDelete.setAttribute('name', 'questionId');
+
+  let hiddenQuizIdDelete = document.createElement('input');
+  hiddenQuizIdDelete.setAttribute('type', 'hidden');
+  hiddenQuizIdDelete.setAttribute('value', quiz.pk);
+  hiddenQuizIdDelete.setAttribute('name', 'quizId');
+
   questionDiv.appendChild(questionHeader);
-  questionDiv.appendChild(editBtn);
+  btnsDiv.appendChild(editBtn);
+  detaildDeleteForm.appendChild(hiddenQueIdDelete);
+  detaildDeleteForm.appendChild(hiddenQuizIdDelete);
+  detaildDeleteForm.appendChild(deleteQuestionBtn);
+  btnsDiv.appendChild(detaildDeleteForm);
+  questionDiv.appendChild(btnsDiv);
+  // detaildDeleteForm.appendChild(hiddenQueId);
+  // detaildDeleteForm.appendChild(questionDiv);
+  // questionSection.appendChild(detaildDeleteForm);
   questionSection.appendChild(questionDiv);
   quizSection.appendChild(questionSection);
 
@@ -128,6 +171,7 @@ for(let i = 0; i < quiz.questions.length; i++) {
       answerP.setAttribute('class', 'uk-text-success uk-text-bold');
     }
     answerSection.appendChild(answerP);
+    // questionSection.appendChild(answerSection);
     questionSection.appendChild(answerSection);
   }
 
@@ -187,7 +231,7 @@ for(let i = 0; i < quiz.questions.length; i++) {
   editQuestionDiv.appendChild(btnDiv);
   editQuestionSection.appendChild(editQuestionDiv);
   editForm.appendChild(editQuestionSection);
-  editForm.appendChild(hiddenQueId);
+  //editForm.appendChild(hiddenQueId);
   editForm.appendChild(hiddenQuizId);
   quizSection.appendChild(editForm);
 
